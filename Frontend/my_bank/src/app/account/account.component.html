@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="flex items-center place-content-between">
+    
+    <a routerLink="/create-account" routerLinkActive="active">
+      <svg class="text-alternative2" width="35" height="35" viewBox="0 0 25 25" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12.5" cy="12.5" r="12" fill="#F6F2E7" stroke="currentColor"/>
+        <line x1="7" y1="12.5" x2="18" y2="12.5" stroke="currentColor"/>
+        <line x1="12.5" y1="7" x2="12.5" y2="18" stroke="currentColor"/>
+      </svg>
+    </a>
+
+    <app-my-bank-icon></app-my-bank-icon>
+  </div>
+
+  <p class="font-semibold">Tous mes comptes</p>
+
+  <!-- <div *ngFor="let item of items">
+    <app-account-card [data]="item"></app-account-card>
+  </div> -->
+
+  <!-- <app-account-card [user_accounts]="getUserAccount"></app-account-card> -->
+  @for (account of userAccounts; track account.id){
+    <app-account-card [data]="account"></app-account-card>
+  }
+
+  <p class="font-semibold">Historique des dépenses</p>
+
+  @for (expense of userExpenses; track expense.id){
+      <app-user-expenses [data]="expense"></app-user-expenses>
+  }
+</div>

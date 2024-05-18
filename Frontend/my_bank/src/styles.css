@@ -1,0 +1,40 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+  --color-primary: #D75A20;
+  --color-secondary: #F2DED2;
+  --color-actions: #262223;
+  --color-alternative: #F6F2E7;
+  --color-alternative2: #262223;
+
+  --text-h1: 48px;
+  --text-h2: 28px;
+  --text-h3: 24px;
+  --text-paragraph: 17px;
+  --text-price: 14px;
+  --text-info: 12px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  padding: 15px;
+  margin: auto;
+}
+
+
+/* Pour les navigateurs WebKit (Safari, Chrome) */
+.scrollbars::-webkit-scrollbar {
+  width: 5px;
+}
+
+.scrollbars::-webkit-scrollbar-thumb {
+  background-color: #D75A20;
+  border-radius: 15px;
+}

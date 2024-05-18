@@ -1,0 +1,23 @@
+<div class="container flex flex-col justify-center place-items-center w-full h-full">
+
+  <app-my-bank-icon [width]="'100'"></app-my-bank-icon>
+
+  <h2 class="text-h2 font-semibold my-8">BIENVENUE</h2>
+
+  <a routerLink="/sign-in">
+    <div class="w-[160px] h-[50px] bg-alternative2 rounded-md grid grid-cols-[50px,1fr] my-4">
+      <div class="flex place-items-center justify-center">
+        <div class="bg-secondary w-[25px] h-[25px] rounded-full flex place-items-center justify-center">
+          <div class="w-[11px] h-[1px] bg-alternative2 absolute"></div>
+          <div class="w-[11px] h-[1px] bg-alternative2 transform rotate-90"></div>
+        </div>
+      </div>
+      <div class="flex place-items-center ">
+        <p class="text-secondary font-semibold text-p">Se connecter</p>
+      </div>
+    </div>
+  </a>
+
+  <a routerLink="/sign-up" class="text-alternative2 font-semibold text-p"> S'inscrire</a>
+
+</div>
