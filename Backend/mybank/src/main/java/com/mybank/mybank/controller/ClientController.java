@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 
@@ -27,21 +25,20 @@ public class ClientController {
   public ClientController(ClientService clientService){
     this.clientService = clientService;
   }
-
   
   @ResponseStatus(value = HttpStatus.CREATED)
-  @PostMapping("/creer")
-  public void creer(@RequestBody Client client){
-    this.clientService.creer(client);
+  @PostMapping("/create")
+  public void createClient(@RequestBody Client client){
+    this.clientService.createClient(client);
   }
 
-    @GetMapping("/rechercher")
-  public List<Client> rechercher(){
-    return this.clientService.rechercher();
+    @GetMapping("/findAll")
+  public List<Client> findClients(){
+    return this.clientService.findClients();
   }
   
-  @GetMapping("/{id}")
-  public Client lire(@PathVariable int id){
-    return this.clientService.lire(id);
+  @GetMapping("/find/{id}")
+  public Client findClientById(@PathVariable int id){
+    return this.clientService.findClientById(id);
   }
 }

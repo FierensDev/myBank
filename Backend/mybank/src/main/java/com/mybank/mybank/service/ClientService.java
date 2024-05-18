@@ -17,15 +17,15 @@ public class ClientService {
       this.clientRepository = clientRepository;
   }
 
-  public void creer(Client client ){
+  public void createClient(Client client ){
     this.clientRepository.save(client);
   }
 
-  public List<Client> rechercher(){
+  public List<Client> findClients(){
     return this.clientRepository.findAll();
   }
 
-  public Client lire(int id){
+  public Client findClientById(int id){
     Optional<Client> optionalClient = this.clientRepository.findById(id);
     if(optionalClient.isPresent()){
       return optionalClient.get();

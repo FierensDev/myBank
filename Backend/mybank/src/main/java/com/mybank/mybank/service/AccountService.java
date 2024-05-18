@@ -16,15 +16,15 @@ public class AccountService {
     this.accountRepository = accountRepository;
   }
 
-  public void ajouter(Account account) {
+  public void createAccount(Account account) {
     accountRepository.save(account);
-}
-
-  public List<Account> rechercher(){
-    return this.accountRepository.findAll();
   }
 
-  public List<Account> rechercherParIdClient(int clientId) {
+  public List<Account> findAccountsByClientId(int clientId) {
     return accountRepository.findByClientId(clientId);
+  }
+  
+  public List<Account> findAllAccounts(){
+    return this.accountRepository.findAll();
   }
 }
