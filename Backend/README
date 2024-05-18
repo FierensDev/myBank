@@ -1,0 +1,108 @@
+//////////////////////////////////////////////////////////////////////
+// ctrl + maj + p (with all extensions of VSCODE for java and spring boot)
+// spring initializer 
+
+/////////////////////////////////////////////////////////////////////
+
+//Entity       => Define the schema bdd
+//Repository   => define methods and extends JpaRepository to get methods CRUD
+//Service      => define methods (to increase modularity)?
+//Sercice/impl => create methods 
+//Controller   => Add routesa and function
+
+// Entity =>> CONTROLLER -> SERVICE -> REPOSITORY
+
+
+// ----------------------------- ENTITY
+
+// public class User {
+
+//   @Id
+//   @GeneratedValue(strategy = GenerationType.IDENTITY)
+//   private Long id;
+
+//   @Column(name = "first_name")
+//   private String firstName;
+
+//   @Column(nullable = false, unique = true)
+//   private String email;
+// }
+
+// ----------------------------- REPOSITORY
+
+// public interface UserRepository extends JpaRepository<User, Long>{
+    // @Query("SELECT u FROM User u WHERE u.email = :email AND u.password = :password")
+    // User findByEmailAndPassword(@Param("email") String email, @Param("password") String password);
+// }
+
+// ----------------------------- SERVICE
+
+// public interface UserService {
+//   User createUser(User user);
+//   User getUser(Long id);
+//   User updateUser(Long id, User user);
+//   String deleteUser(Long id);
+
+//   User findByEmailAndPassword(String email, String password);
+// }
+
+// ----------------------------- SERVICE/IMPL
+
+// public class UserServiceImpl implements UserService {
+
+//   private UserRepository userRepository;
+
+//   @Override
+//   public User createUser(User user) {
+//       return userRepository.save(user);
+//   }
+
+//   @Override
+//   public User getUser(Long id) {
+//       Optional<User> optionalUser = userRepository.findById(id);
+//       return optionalUser.orElse(null);
+//   }
+
+//   @Override
+//   public User updateUser(Long id, User user) {
+//       return userRepository.findById(id)
+//               .map(p-> {
+//                   p.setEmail(user.getEmail());
+//                   p.setFirstName(user.getFirstName());
+//                   p.setLastName(user.getLastName());
+//                   p.setPassword(user.getPassword());
+//                   return userRepository.save(p);
+//               }).orElseThrow(() -> new RuntimeException("User not found"));
+//   }
+// }
+
+// ----------------------------- CONTROLLER
+
+// public class UserController {
+//   private final UserService userService;
+
+//     @CrossOrigin(origins = "*")
+
+//     @PostMapping("/create")
+//     public User create(@RequestBody User user) {
+//         return userService.createUser(user);
+//     }
+
+//     @PostMapping("/getByEmailAndPassword")
+//     public User getUserByEmailAndPassword(@RequestParam String email, @RequestParam String password){
+//         return userService.findByEmailAndPassword(email, password);
+//     }
+
+//     @GetMapping("/get/{id}")
+//     public User getUser(@PathVariable long id){
+//         return userService.getUser(id);
+//     }
+// }
+
+
+///////////////////////////////////////////////////////////////////////////////////
+
+// Gérer le JWT de l'user
+// Relier User a la table Account one (user) to many (account)
+
+// BDD 1:37:00 1:47 relation many to one
