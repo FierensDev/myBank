@@ -32,7 +32,7 @@ public class ClientController {
     this.clientService.createClient(client);
   }
 
-    @GetMapping("/findAll")
+  @GetMapping("/findAll")
   public List<Client> findClients(){
     return this.clientService.findClients();
   }
@@ -41,4 +41,6 @@ public class ClientController {
   public Client findClientById(@PathVariable int id){
     return this.clientService.findClientById(id);
   }
+
+  
 }
