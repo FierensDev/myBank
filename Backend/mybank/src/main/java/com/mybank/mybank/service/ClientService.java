@@ -32,4 +32,14 @@ public class ClientService {
     }
     return null;
   }
+
+  public void deleteClient(int id){
+    this.clientRepository.deleteById(id);
+  }
+
+  public void modifyClient(int id, Client client){
+    Client clientInBdd = this.findClientById(id);
+    clientInBdd.setEmail(client.getEmail());
+    this.clientRepository.save(clientInBdd);
+  }
 }
