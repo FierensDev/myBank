@@ -24,4 +24,28 @@ public class Client {
 
   @Column(unique = true)
   private String email;
+
+  private String password;
+
+  private int secretCode;
+
+  private String lastName;
+
+  private String firstName;
+
+  private String gender;
+
+  private String dateBirthday;
+
+  private String dateCreation;
+
+  private String address;
+
+  private String city;
+
+  private String zipCode;
+
+  private String country;
+
+  private String phoneNumber;
 }

@@ -40,6 +40,18 @@ public class ClientService {
   public void modifyClient(int id, Client client){
     Client clientInBdd = this.findClientById(id);
     clientInBdd.setEmail(client.getEmail());
+    clientInBdd.setPassword(client.getPassword());
+    clientInBdd.setSecretCode(client.getSecretCode());
+    clientInBdd.setLastName(client.getLastName());
+    clientInBdd.setFirstName(client.getFirstName());
+    clientInBdd.setGender(client.getGender());
+    clientInBdd.setDateBirthday(client.getDateBirthday());
+    clientInBdd.setDateCreation(client.getDateCreation());
+    clientInBdd.setAddress(client.getAddress());
+    clientInBdd.setCity(client.getCity());
+    clientInBdd.setZipCode(client.getZipCode());
+    clientInBdd.setCountry(client.getCountry());
+    clientInBdd.setPhoneNumber(client.getPhoneNumber());
     this.clientRepository.save(clientInBdd);
   }
 }
