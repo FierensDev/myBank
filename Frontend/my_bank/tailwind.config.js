@@ -9,7 +9,8 @@ module.exports = {
         primary: '#D75A20',
         secondary: '#F2DED2',
         actions: '#262223',
-        alternative: '#F6F2E7',
+        // alternative: '#F6F2E7',
+        alternative: '#606060',
         alternative2: '#262223'
       },
       fontSize: {
