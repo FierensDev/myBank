@@ -1,8 +1,8 @@
 <div class="bg-alternative grid grid-rows-[0px,1fr,50px]  h-[calc(100vh)]">
-  <!-- <router-outlet (activate)="changeOfRoutes()"></router-outlet> -->
+
   <router-outlet></router-outlet>
-  <!-- @if(userToken){ -->
+  @if(token){
     <app-navbar></app-navbar>
-  <!-- } -->
+  }
 
 </div>
