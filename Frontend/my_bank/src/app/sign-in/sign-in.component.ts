@@ -26,8 +26,11 @@ export class SignInComponent {
     password : new FormControl('')
   })
 
-
   submitApplication(){
     console.log(`deunsLog : test`, this.applyForm.value)
+
+    fetch('http://localhost:8080/client/create', {
+      method: 'POST'
+    })
   }
 }
