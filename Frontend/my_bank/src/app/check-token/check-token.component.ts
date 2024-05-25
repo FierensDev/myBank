@@ -15,7 +15,5 @@ export class CheckTokenComponent implements OnInit {
   token = false;
   constructor(private router: Router, private cookieService: CookieService){}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

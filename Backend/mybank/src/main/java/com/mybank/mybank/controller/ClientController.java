@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 
@@ -35,6 +37,12 @@ public class ClientController {
   public void createClient(@RequestBody Client client){
     this.clientService.createClient(client);
   }
+
+  @GetMapping("/find/{email}/{password}")
+  public Client findClientByEmailAndPassword(@PathVariable String email, @PathVariable String password) {
+      return this.clientService.findClientByEmailAndPassword(email, password);
+  }
+  
 
   @GetMapping("/findAll")
   public List<Client> findClients(){

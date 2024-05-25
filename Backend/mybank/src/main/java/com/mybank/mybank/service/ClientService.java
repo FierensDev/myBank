@@ -21,6 +21,10 @@ public class ClientService {
     this.clientRepository.save(client);
   }
 
+  public Client findClientByEmailAndPassword(String email, String password){
+    return this.clientRepository.findByEmailAndPassword(email, password);
+  }
+
   public List<Client> findClients(){
     return this.clientRepository.findAll();
   }
