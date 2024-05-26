@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { MyBankIconComponent } from '../my-bank-icon/my-bank-icon.component';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
+import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-settings',
@@ -11,6 +13,9 @@ import { NgClass } from '@angular/common';
   styleUrl: './user-settings.component.css'
 })
 export class UserSettingsComponent {
+
+  constructor(private cookieService: CookieService, private router: Router){}
+
   cssIsFocused: string = '';
   onFocus(e: string){
     this.cssIsFocused = e;
@@ -35,5 +40,11 @@ export class UserSettingsComponent {
 
   submitApplication(){
     console.log(`deunsLog : test`, this.applyForm.value)
+  }
+
+  disconnectUser(){
+    console.log(`deunsLog : DISCONNCT`, )
+    this.cookieService.delete('CLIENT');
+    this.router.navigateByUrl('/mybank/home')
   }
 }

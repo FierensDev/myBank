@@ -12,7 +12,7 @@ import { NavbarComponent } from '../navbar/navbar.component';
 })
 export class CheckTokenComponent implements OnInit {
 
-  token = false;
+  token = true;
   constructor(private router: Router, private cookieService: CookieService){}
 
   ngOnInit(): void {}
