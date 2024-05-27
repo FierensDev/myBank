@@ -3,6 +3,8 @@ import { MyBankIconComponent } from '../my-bank-icon/my-bank-icon.component';
 import { AccountCardComponent } from '../account-card/account-card.component';
 import { UserExpensesComponent } from '../user-expenses/user-expenses.component';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { environnement } from '../../environnement';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-account',
@@ -12,9 +14,18 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   styleUrl: './account.component.css'
 })
 export class AccountComponent implements OnInit {
+
+  constructor(private cookieService: CookieService){}
   
   ngOnInit(): void {
-      
+    let userId = JSON.parse(this.cookieService.get('CLIENT'))
+    console.log(`deunsLog : `, environnement.server_url + '/account/find/' + userId)
+    fetch(environnement.server_url + '/account/find/' + 2, {
+      method: 'GET'
+    })
+    .then(res => res.json())
+    .then(f => console.log(`deunsLog : `, f))
+    .catch(err => console.log(`deunsLog : `, err))
   }
 
   userAccounts: any[] = [

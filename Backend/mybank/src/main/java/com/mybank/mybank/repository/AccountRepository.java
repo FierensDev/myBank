@@ -3,9 +3,12 @@ package com.mybank.mybank.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.mybank.mybank.entity.Account;
 
 public interface AccountRepository extends JpaRepository<Account, Integer> {
-  List<Account> findByClientId(int clientId);
+  @Query("SELECT acc FROM Account acc WHERE acc.client.id = :clientId")
+  List<Account> findAllByClientId(@Param("clientId") int clientId);
 }

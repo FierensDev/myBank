@@ -22,7 +22,7 @@ public class AccountService {
   }
 
   public List<Account> findAccountsByClientId(int clientId) {
-    return accountRepository.findByClientId(clientId);
+    return accountRepository.findAllByClientId(clientId);
   }
 
   public Account findAccountById(int id) {
