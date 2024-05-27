@@ -19,44 +19,18 @@ export class AccountComponent implements OnInit {
   
   ngOnInit(): void {
     let userId = JSON.parse(this.cookieService.get('CLIENT'))
-    console.log(`deunsLog : `, environnement.server_url + '/account/find/' + userId)
-    fetch(environnement.server_url + '/account/find/' + 2, {
+    console.log(`deunsLog : `, environnement.server_url + '/account/find/' + userId.id)
+    fetch(environnement.server_url + '/account/find/client/' + userId.id, {
       method: 'GET'
     })
     .then(res => res.json())
-    .then(f => console.log(`deunsLog : `, f))
+    .then(f => {
+      // this.userAccounts = f
+    })
     .catch(err => console.log(`deunsLog : `, err))
   }
 
-  userAccounts: any[] = [
-      {
-      id: 1,
-      idUser: 1,
-      iban: 'FR87654564785',
-      amount: 999875,
-      type: 'professionnel',
-      name: 'Compte de mon magasin',
-      date_creation: 102940987987
-    },
-    // {
-    //   id: 2,
-    //   idUser: 1,
-    //   iban: 'FR0987654678',
-    //   amount: 109589,
-    //   type: 'personnel',
-    //   name: 'Compte personnel',
-    //   date_creation: 102940987987
-    // },
-    // {
-    //   id: 3,
-    //   idUser: 1,
-    //   iban: 'FR98709769869',
-    //   amount: 15000,
-    //   type: 'personnel',
-    //   name: 'Compte de mon fils',
-    //   date_creation: 102940987987
-    // }
-  ]
+  userAccounts: any[] = []
 
   userExpenses: any[] = [
     {

@@ -19,13 +19,24 @@
   </div> -->
 
   <!-- <app-account-card [user_accounts]="getUserAccount"></app-account-card> -->
-  @for (account of userAccounts; track account.id){
-    <app-account-card [data]="account"></app-account-card>
+  @if(userAccounts.length === 0){
+    <p class="my-4">Vous n'avez aucun comptes, cliquez sur l'icone + pour en créer un</p>
+  } 
+  @else{
+    @for (account of userAccounts; track account.id){
+      <app-account-card [data]="account"></app-account-card>
+    }
   }
-
+ 
   <p class="font-semibold">Historique des dépenses</p>
-
-  @for (expense of userExpenses; track expense.id){
+  @if(userExpenses.length === 0){
+    <p class="my-4">Vous n'avez aucune dépenses</p>
+  } 
+  @else{
+    @for (expense of userExpenses; track expense.id){
       <app-user-expenses [data]="expense"></app-user-expenses>
+    }
   }
+
+ 
 </div>
