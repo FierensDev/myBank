@@ -31,7 +31,6 @@ public class TransactionController {
     this.transactionService = transactionService;
   }
 
-  @CrossOrigin(origins = "*")
   @ResponseStatus(value = HttpStatus.CREATED)
   @PostMapping("/create")
   public void createTransaction(@RequestBody Transaction transaction){

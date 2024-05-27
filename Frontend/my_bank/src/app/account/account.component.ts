@@ -25,7 +25,7 @@ export class AccountComponent implements OnInit {
     })
     .then(res => res.json())
     .then(f => {
-      // this.userAccounts = f
+      this.userAccounts = f
     })
     .catch(err => console.log(`deunsLog : `, err))
   }
@@ -33,14 +33,14 @@ export class AccountComponent implements OnInit {
   userAccounts: any[] = []
 
   userExpenses: any[] = [
-    {
-      id:1,
-      ibanSender: 'FR98709769869',
-      ibanReceiver: 'FR123445',
-      name: 'Salaire',
-      amount: 3500,
-      date: 1245
-    },
+    // {
+    //   id:1,
+    //   ibanSender: 'FR98709769869',
+    //   ibanReceiver: 'FR123445',
+    //   name: 'Salaire',
+    //   amount: 3500,
+    //   date: 1245
+    // },
     // {
     //   id:2,
     //   ibanSender: 'FR98709769869',

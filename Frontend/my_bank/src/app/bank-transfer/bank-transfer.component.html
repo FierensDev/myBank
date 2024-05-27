@@ -12,14 +12,32 @@
 
     <div class="flex my-7">
       <p class="mr-4">à</p>
-      <input type="text" class="outline-none bg-transparent border-b-[1px] border-primary w-full" formControlName="iban">
+      <input type="text" class="outline-none bg-transparent border-b-[1px] border-primary w-full" formControlName="ibanReceiver">
+    </div>
+    
+    <div>
+      <p>Depuis : {{ applyForm.get('ibanSender')?.value }}</p> 
+
+      @if(userAccounts){
+        <div class="">
+          @for (account of userAccounts; track account.id){
+            <div [ngClass]="applyForm.get('ibanSender')?.value == account.iban ? 'border-primary bg-secondary' : ''" class="my-2 rounded-md p-2 border border-2" (click)="setApplyFormIbanSender(account?.iban)">
+              <p>{{account.name}}</p>
+              <p>{{account.iban}}</p>
+            </div>
+          }
+        </div>
+      }
+      @else {
+        <p>Veuillez créer un compte</p>
+      }
     </div>
 
     <button type="submit" class="rounded-md bg-primary text-secondary w-full h-[40px]">Valider le virement</button>
   </form>
 
 </div>
-<div class="h-[2px] w-[100vw] bg-black"></div>
+<!-- <div class="h-[2px] w-[100vw] bg-black"></div>
 
 <div class="container">
   <h3 class="text-h3 font-semibold mb-7">Historique des virements</h3>
@@ -50,4 +68,4 @@
     </div>
   </div>
   <div class="h-[1px] bg-gray-400 my-2"></div>
-</div>
+</div> -->
