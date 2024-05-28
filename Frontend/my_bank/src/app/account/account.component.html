@@ -29,12 +29,12 @@
   }
  
   <p class="font-semibold">Historique des dépenses</p>
-  @if(userExpenses.length === 0){
+  @if(userAccounts.length === 0){
     <p class="my-4">Vous n'avez aucune dépenses</p>
   } 
   @else{
-    @for (expense of userExpenses; track expense.id){
-      <app-user-expenses [data]="expense"></app-user-expenses>
+    @for (account of userAccounts; track account.id){
+      <app-user-expenses [data]="account"></app-user-expenses>
     }
   }
 
