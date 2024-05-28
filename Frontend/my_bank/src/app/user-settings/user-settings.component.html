@@ -6,13 +6,13 @@
 
   <div class="grid grid-cols-[70px,1fr]">
     <div class="bg-primary w-[55px] h-[55px] m-auto rounded-full flex place-items-center place-content-center">
-      <p class="text-h3 font-bold">D</p>
-      <p class="text-h3 font-bold">F</p>
+      <p class="text-h3 font-bold">{{clientData.firstName[0]}}</p>
+      <p class="text-h3 font-bold">{{clientData.lastName[0]}}</p>
     </div>
     <div>
       <p class="text-h3 font-bold">Mr/Mme</p>
-      <p class="text-h3 font-bold">Lastname Firstname</p>
-      <p>Née le xx/xx/xxxx</p>
+      <p class="text-h3 font-bold">{{clientData.lastName}} {{clientData.firstName}}</p>
+      <p>Née le {{clientData.dateBirthday}}</p>
     </div>
   </div>
 </div>
@@ -93,8 +93,15 @@
     <div [ngClass]="cssIsFocused === 'phone_number' ? 'my-4 bg-secondary relative h-[40px] border border-black rounded-md' : 'my-4 bg-secondary relative h-[40px]'">
       <label for="phone_number" [ngClass]="cssIsFocused === 'phone_number' || (applyForm.value.phone_number != 0 && applyForm.value.phone_number != null) ? ' text-form absolute top-0 left-0 z-10 flex place-items-center pl-[10px] pointer-events-none' : ' text-small absolute z-10 inset-0 flex place-items-center pl-[10px] pointer-events-none'">Numéro de téléphone</label>
       <div class="flex justify-between ">
-        <input id="phone_number" type="number" [ngClass]="cssIsFocused === 'phone_number' || (applyForm.value.phone_number != 0 && applyForm.value.phone_number != null) ? 'bg-transparent outline-none absolute bottom-0 left-[10px] right-[40px] h-[30px]' : 'text-secondary bg-transparent outline-none absolute bottom-0 left-[10px] right-[40px] h-[30px]'" formControlName="phone_number" (focus)="onFocus('phone_number')" (blur)="onBlur()">
+        <input id="phone_number" type="string" [ngClass]="cssIsFocused === 'phone_number' || (applyForm.value.phone_number != 0 && applyForm.value.phone_number != null) ? 'bg-transparent outline-none absolute bottom-0 left-[10px] right-[40px] h-[30px]' : 'text-secondary bg-transparent outline-none absolute bottom-0 left-[10px] right-[40px] h-[30px]'" formControlName="phone_number" (focus)="onFocus('phone_number')" (blur)="onBlur()">
       </div>
+    </div>
+
+    <div class="my-4 border-b-[1px] border-primary">
+      <select name="gender" id="type" class="bg-transparent w-full" formControlName="gender">
+        <option [ngValue]="'men'">Homme</option>
+        <option [ngValue]="'women'">Femme</option>
+      </select>
     </div>
   
   </div>

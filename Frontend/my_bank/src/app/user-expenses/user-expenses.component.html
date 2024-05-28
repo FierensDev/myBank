@@ -1,6 +1,6 @@
 <div >
   @for(transaction of transactionsByIban; track transaction.id){
-    <div class=" my-4">
+    <div class="my-4">
       @if(transaction.ibanReceiver === data.iban){
         <p>Nom : {{transaction.name}}</p>
         <div class="flex justify-between">
@@ -19,9 +19,5 @@
       }
       <div class="bg-black h-[1px] w-full"></div>
     </div>  
-    <!-- <p>{{transaction.amount}}</p>
-      <p>{{transaction.ibanReceiver}}</p>
-      <p>{{transaction.ibanSender}}</p>
-      <p>{{transaction.name}}</p> -->
   }
 </div>
