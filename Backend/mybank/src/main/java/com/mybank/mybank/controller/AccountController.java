@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mybank.mybank.entity.Account;
 import com.mybank.mybank.entity.Client;
+import com.mybank.mybank.entity.Transaction;
 import com.mybank.mybank.service.AccountService;
 
 import java.util.List;
@@ -58,6 +59,11 @@ public class AccountController {
     return this.accountService.findAllAccounts();
   }
 
+  // @GetMapping("/find/byIban/{iban}")
+  // public Account findAccountById(@PathVariable String iban){
+  //   return this.accountService.findAccountByIban(iban);
+  // }
+
   
   @ResponseStatus(value = HttpStatus.ACCEPTED)
   @DeleteMapping("/delete/{id}")
@@ -68,5 +74,15 @@ public class AccountController {
   @PutMapping("/modify/{id}")
   public void modifyAccount(@PathVariable int id, @RequestBody Account account) {
     this.accountService.modifyAccount(id, account);
+  }
+
+  // @PutMapping("/modify/{ibanSender}/{ibanReceiver}/{amount}")
+  // public void modifyAccountByIban(@PathVariable String ibanSender,@PathVariable String ibanReceiver, @PathVariable int amount) {
+  //   this.accountService.modifyAccountByIbanSender(ibanSender, ibanReceiver, amount);
+  // }
+  
+  @PutMapping("/newTransaction")
+  public void modifyAccountByIban(@RequestBody Transaction transaction) {
+    this.accountService.modifyAccountsAmount(transaction);
   }
 }
