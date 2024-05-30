@@ -111,6 +111,6 @@ export class UserSettingsComponent implements OnInit {
 
   disconnectUser(){
     this.cookieService.delete('CLIENT');
-    this.router.navigateByUrl('/mybank/home');
+    window.location.href = "http://localhost:4200/mybank/home";
   }
 }

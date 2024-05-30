@@ -44,7 +44,8 @@ export class SignInComponent {
       let cookie = this.cookieService.get('CLIENT')
       console.log(JSON.parse(cookie));
 
-      this.router.navigateByUrl('/mybank/account');
+      // this.router.navigateByUrl('/mybank/account');
+      window.location.href = "http://localhost:4200/mybank/account";
     })
     .catch(error => {
       console.error('There was a problem with the fetch operation:', error);
