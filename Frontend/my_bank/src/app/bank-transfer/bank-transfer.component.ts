@@ -16,6 +16,7 @@ export class BankTransferComponent implements OnInit {
 
   constructor(private cookieService: CookieService){}
   userAccounts: any = null
+  
   ngOnInit(): void {
     let userId = JSON.parse(this.cookieService.get('CLIENT'))
     
@@ -23,8 +24,8 @@ export class BankTransferComponent implements OnInit {
       method: 'GET'
     })
     .then(res => res.json())
-    .then(f => {
-      this.userAccounts = f
+    .then(data => {
+      this.userAccounts = data
     })
     .catch(err => console.log(`deunsLog : `, err))
   }
@@ -55,9 +56,8 @@ export class BankTransferComponent implements OnInit {
 
   submitApplication(){
     console.log(`deunsLog : test`, this.applyForm.value)
-
-    fetch(environnement.server_url + '/transaction/create',{
-      method: "POST",
+    fetch(environnement.server_url + '/account/newTransaction',{
+      method: "PUT",
       headers: {
         "Content-type": "application/json"
       },
@@ -66,11 +66,21 @@ export class BankTransferComponent implements OnInit {
         "ibanSender": this.applyForm.value.ibanSender,
         "ibanReceiver": this.applyForm.value.ibanReceiver,
         "name": "name",
-        "date": "1234"
+        "date": new Date().toISOString()
       })
     })
-    .then(res => console.log(`deunsLog : `, res))
-    .catch(err =>  console.log(`deunsLog : `, err))
+    .then(response => {
+      if (!response.ok) {
+          throw new Error('Network response was not ok ' + response.statusText);
+      }
+      return response.json();
+    })
+    .then(data => {
+        console.log('Success:', data);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
   }
 
   

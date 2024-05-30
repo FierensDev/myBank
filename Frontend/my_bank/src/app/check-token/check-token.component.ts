@@ -12,8 +12,10 @@ import { NavbarComponent } from '../navbar/navbar.component';
 })
 export class CheckTokenComponent implements OnInit {
 
-  token = true;
+  token:any;
   constructor(private router: Router, private cookieService: CookieService){}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.token = this.cookieService.get('CLIENT');
+  }
 }

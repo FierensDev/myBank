@@ -27,6 +27,8 @@ export class UserSettingsComponent implements OnInit {
     })
     .then(res => res.json())
     .then(userAcc => {
+      console.log(userAcc);
+      
       this.clientData = userAcc
       this.applyForm.patchValue({
         email: userAcc.email,

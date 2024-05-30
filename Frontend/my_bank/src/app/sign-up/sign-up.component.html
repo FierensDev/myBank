@@ -5,7 +5,7 @@
   <form [formGroup]="applyForm" (submit)="submitApplication()" class="w-full">  
    
     
-    <div [ngClass]="cssIsFocused === 'last_name' ? 'my-4 bg-secondary relative h-[40px] border border-black rounded-md' : 'my-4 bg-secondary relative h-[40px]'">
+    <!-- <div [ngClass]="cssIsFocused === 'last_name' ? 'my-4 bg-secondary relative h-[40px] border border-black rounded-md' : 'my-4 bg-secondary relative h-[40px]'">
       <label for="last_name" [ngClass]="cssIsFocused === 'last_name' || (applyForm.value.last_name != '' && applyForm.value.last_name != null) ? ' text-form absolute top-0 left-0 z-10 flex place-items-center pl-[10px] pointer-events-none' : ' text-small absolute z-10 inset-0 flex place-items-center pl-[10px] pointer-events-none'">Nom de famille</label>
       <div class="flex justify-between ">
         <input id="last_name" type="string" [ngClass]="cssIsFocused === 'last_name' || (applyForm.value.last_name != '' && applyForm.value.last_name != null) ? 'bg-transparent outline-none absolute bottom-0 left-[10px] right-[40px] h-[30px]' : 'text-secondary bg-transparent outline-none absolute bottom-0 left-[10px] right-[40px] h-[30px]'" formControlName="last_name" (focus)="onFocus('last_name')" (blur)="onBlur()">
@@ -39,9 +39,92 @@
       <div class="flex justify-between ">
         <input id="password" type="string" [ngClass]="cssIsFocused === 'password' || (applyForm.value.password != '' && applyForm.value.password != null) ? 'bg-transparent outline-none absolute bottom-0 left-[10px] right-[40px] h-[30px]' : 'text-secondary bg-transparent outline-none absolute bottom-0 left-[10px] right-[40px] h-[30px]'" formControlName="password" (focus)="onFocus('password')" (blur)="onBlur()">
       </div>
+    </div> -->
+
+    <div class="overflow-y-auto h-[500px] scrollbars my-4">
+
+
+
+      <div [ngClass]="cssIsFocused === 'email' ? 'my-4 bg-secondary relative h-[40px] border border-black rounded-md' : 'my-4 bg-secondary relative h-[40px]'">
+        <label for="email" [ngClass]="cssIsFocused === 'email' || (applyForm.value.email != '' && applyForm.value.email != null) ? ' text-form absolute top-0 left-0 z-10 flex place-items-center pl-[10px] pointer-events-none' : ' text-small absolute z-10 inset-0 flex place-items-center pl-[10px] pointer-events-none'">Email</label>
+        <div class="flex justify-between ">
+          <input id="email" type="string" [ngClass]="cssIsFocused === 'email' || (applyForm.value.email != '' && applyForm.value.email != null) ? 'bg-transparent outline-none absolute bottom-0 left-[10px] right-[40px] h-[30px]' : 'text-secondary bg-transparent outline-none absolute bottom-0 left-[10px] right-[40px] h-[30px]'" formControlName="email" (focus)="onFocus('email')" (blur)="onBlur()">
+        </div>
+      </div>
+  
+      <div [ngClass]="cssIsFocused === 'password' ? 'my-4 bg-secondary relative h-[40px] border border-black rounded-md' : 'my-4 bg-secondary relative h-[40px]'">
+        <label for="password" [ngClass]="cssIsFocused === 'password' || (applyForm.value.password != '' && applyForm.value.password != null) ? ' text-form absolute top-0 left-0 z-10 flex place-items-center pl-[10px] pointer-events-none' : ' text-small absolute z-10 inset-0 flex place-items-center pl-[10px] pointer-events-none'">Mot de passe</label>
+        <div class="flex justify-between ">
+          <input id="password" type="string" [ngClass]="cssIsFocused === 'password' || (applyForm.value.password != '' && applyForm.value.password != null) ? 'bg-transparent outline-none absolute bottom-0 left-[10px] right-[40px] h-[30px]' : 'text-secondary bg-transparent outline-none absolute bottom-0 left-[10px] right-[40px] h-[30px]'" formControlName="password" (focus)="onFocus('password')" (blur)="onBlur()">
+        </div>
+      </div>
+  
+      <div [ngClass]="cssIsFocused === 'last_name' ? 'my-4 bg-secondary relative h-[40px] border border-black rounded-md' : 'my-4 bg-secondary relative h-[40px]'">
+        <label for="last_name" [ngClass]="cssIsFocused === 'last_name' || (applyForm.value.last_name != '' && applyForm.value.last_name != null) ? ' text-form absolute top-0 left-0 z-10 flex place-items-center pl-[10px] pointer-events-none' : ' text-small absolute z-10 inset-0 flex place-items-center pl-[10px] pointer-events-none'">Nom de famille</label>
+        <div class="flex justify-between ">
+          <input id="last_name" type="string" [ngClass]="cssIsFocused === 'last_name' || (applyForm.value.last_name != '' && applyForm.value.last_name != null) ? 'bg-transparent outline-none absolute bottom-0 left-[10px] right-[40px] h-[30px]' : 'text-secondary bg-transparent outline-none absolute bottom-0 left-[10px] right-[40px] h-[30px]'" formControlName="last_name" (focus)="onFocus('last_name')" (blur)="onBlur()">
+        </div>
+      </div>
+  
+      <div [ngClass]="cssIsFocused === 'first_name' ? 'my-4 bg-secondary relative h-[40px] border border-black rounded-md' : 'my-4 bg-secondary relative h-[40px]'">
+        <label for="first_name" [ngClass]="cssIsFocused === 'first_name' || (applyForm.value.first_name != '' && applyForm.value.first_name != null) ? ' text-form absolute top-0 left-0 z-10 flex place-items-center pl-[10px] pointer-events-none' : ' text-small absolute z-10 inset-0 flex place-items-center pl-[10px] pointer-events-none'">Prénom</label>
+        <div class="flex justify-between ">
+          <input id="first_name" type="string" [ngClass]="cssIsFocused === 'first_name' || (applyForm.value.first_name != '' && applyForm.value.first_name != null) ? 'bg-transparent outline-none absolute bottom-0 left-[10px] right-[40px] h-[30px]' : 'text-secondary bg-transparent outline-none absolute bottom-0 left-[10px] right-[40px] h-[30px]'" formControlName="first_name" (focus)="onFocus('first_name')" (blur)="onBlur()">
+        </div>
+      </div>
+  
+      <div [ngClass]="cssIsFocused === 'date_birthdate' ? 'my-4 bg-secondary relative h-[40px] border border-black rounded-md' : 'my-4 bg-secondary relative h-[40px]'">
+        <label for="date_birthdate" [ngClass]="cssIsFocused === 'date_birthdate' || (applyForm.value.date_birthdate != '' && applyForm.value.date_birthdate != null) ? 'text-form absolute top-0 left-0 z-10 flex place-items-center pl-[10px] pointer-events-none' : 'text-small absolute z-10 inset-0 flex place-items-center pl-[10px] pointer-events-none'">Date de naissance</label>
+        <div class="flex justify-between">
+          <input id="date_birthdate" type="date" [ngClass]="cssIsFocused === 'date_birthdate' || (applyForm.value.date_birthdate != '' && applyForm.value.date_birthdate != null) ? 'bg-transparent outline-none absolute bottom-0 left-[10px] right-[40px] h-[30px]' : 'text-secondary bg-transparent outline-none absolute bottom-0 left-[10px] right-[40px] h-[30px]'" formControlName="date_birthdate" (focus)="onFocus('date_birthdate')" (blur)="onBlur()">
+        </div>
+      </div>
+    
+      <div [ngClass]="cssIsFocused === 'address' ? 'my-4 bg-secondary relative h-[40px] border border-black rounded-md' : 'my-4 bg-secondary relative h-[40px]'">
+        <label for="address" [ngClass]="cssIsFocused === 'address' || (applyForm.value.address != '' && applyForm.value.address != null) ? ' text-form absolute top-0 left-0 z-10 flex place-items-center pl-[10px] pointer-events-none' : ' text-small absolute z-10 inset-0 flex place-items-center pl-[10px] pointer-events-none'">Adresse</label>
+        <div class="flex justify-between ">
+          <input id="address" type="string" [ngClass]="cssIsFocused === 'address' || (applyForm.value.address != '' && applyForm.value.address != null) ? 'bg-transparent outline-none absolute bottom-0 left-[10px] right-[40px] h-[30px]' : 'text-secondary bg-transparent outline-none absolute bottom-0 left-[10px] right-[40px] h-[30px]'" formControlName="address" (focus)="onFocus('address')" (blur)="onBlur()">
+        </div>
+      </div>
+    
+      <div [ngClass]="cssIsFocused === 'city' ? 'my-4 bg-secondary relative h-[40px] border border-black rounded-md' : 'my-4 bg-secondary relative h-[40px]'">
+        <label for="city" [ngClass]="cssIsFocused === 'city' || (applyForm.value.city != '' && applyForm.value.city != null) ? ' text-form absolute top-0 left-0 z-10 flex place-items-center pl-[10px] pointer-events-none' : ' text-small absolute z-10 inset-0 flex place-items-center pl-[10px] pointer-events-none'">Ville</label>
+        <div class="flex justify-between ">
+          <input id="city" type="string" [ngClass]="cssIsFocused === 'city' || (applyForm.value.city != '' && applyForm.value.city != null) ? 'bg-transparent outline-none absolute bottom-0 left-[10px] right-[40px] h-[30px]' : 'text-secondary bg-transparent outline-none absolute bottom-0 left-[10px] right-[40px] h-[30px]'" formControlName="city" (focus)="onFocus('city')" (blur)="onBlur()">
+        </div>
+      </div>
+    
+      <div [ngClass]="cssIsFocused === 'zip_code' ? 'my-4 bg-secondary relative h-[40px] border border-black rounded-md' : 'my-4 bg-secondary relative h-[40px]'">
+        <label for="zip_code" [ngClass]="cssIsFocused === 'zip_code' || (applyForm.value.zip_code != '' && applyForm.value.zip_code != null) ? ' text-form absolute top-0 left-0 z-10 flex place-items-center pl-[10px] pointer-events-none' : ' text-small absolute z-10 inset-0 flex place-items-center pl-[10px] pointer-events-none'">Code postal</label>
+        <div class="flex justify-between ">
+          <input id="zip_code" type="string" [ngClass]="cssIsFocused === 'zip_code' || (applyForm.value.zip_code != '' && applyForm.value.zip_code != null) ? 'bg-transparent outline-none absolute bottom-0 left-[10px] right-[40px] h-[30px]' : 'text-secondary bg-transparent outline-none absolute bottom-0 left-[10px] right-[40px] h-[30px]'" formControlName="zip_code" (focus)="onFocus('zip_code')" (blur)="onBlur()">
+        </div>
+      </div>
+    
+      <div [ngClass]="cssIsFocused === 'country' ? 'my-4 bg-secondary relative h-[40px] border border-black rounded-md' : 'my-4 bg-secondary relative h-[40px]'">
+        <label for="country" [ngClass]="cssIsFocused === 'country' || (applyForm.value.country != '' && applyForm.value.country != null) ? ' text-form absolute top-0 left-0 z-10 flex place-items-center pl-[10px] pointer-events-none' : ' text-small absolute z-10 inset-0 flex place-items-center pl-[10px] pointer-events-none'">Pays</label>
+        <div class="flex justify-between ">
+          <input id="country" type="string" [ngClass]="cssIsFocused === 'country' || (applyForm.value.country != '' && applyForm.value.country != null) ? 'bg-transparent outline-none absolute bottom-0 left-[10px] right-[40px] h-[30px]' : 'text-secondary bg-transparent outline-none absolute bottom-0 left-[10px] right-[40px] h-[30px]'" formControlName="country" (focus)="onFocus('country')" (blur)="onBlur()">
+        </div>
+      </div>
+    
+      <div [ngClass]="cssIsFocused === 'phone_number' ? 'my-4 bg-secondary relative h-[40px] border border-black rounded-md' : 'my-4 bg-secondary relative h-[40px]'">
+        <label for="phone_number" [ngClass]="cssIsFocused === 'phone_number' || (applyForm.value.phone_number != 0 && applyForm.value.phone_number != null) ? ' text-form absolute top-0 left-0 z-10 flex place-items-center pl-[10px] pointer-events-none' : ' text-small absolute z-10 inset-0 flex place-items-center pl-[10px] pointer-events-none'">Numéro de téléphone</label>
+        <div class="flex justify-between ">
+          <input id="phone_number" type="string" [ngClass]="cssIsFocused === 'phone_number' || (applyForm.value.phone_number != 0 && applyForm.value.phone_number != null) ? 'bg-transparent outline-none absolute bottom-0 left-[10px] right-[40px] h-[30px]' : 'text-secondary bg-transparent outline-none absolute bottom-0 left-[10px] right-[40px] h-[30px]'" formControlName="phone_number" (focus)="onFocus('phone_number')" (blur)="onBlur()">
+        </div>
+      </div>
+  
+      <div class="my-4 border-b-[1px] border-primary">
+        <select name="gender" id="type" class="bg-transparent w-full" formControlName="gender">
+          <option [ngValue]="'men'">Homme</option>
+          <option [ngValue]="'women'">Femme</option>
+        </select>
+      </div>
+    
     </div>
 
-    <button type="submit" class="rounded-md bg-primary text-secondary w-full h-[40px]">Se connecter</button>
+    <button type="submit" class="rounded-md bg-primary text-secondary w-full h-[40px]">S'inscrire</button>
     
     <a routerLink="/mybank/home">
       <div type="submit" class="rounded-md bg-alternative2 text-secondary w-full h-[40px] flex place-items-center justify-center mt-4">Retour</div>
