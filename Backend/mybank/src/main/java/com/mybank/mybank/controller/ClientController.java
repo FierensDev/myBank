@@ -34,8 +34,17 @@ public class ClientController {
   
   @ResponseStatus(value = HttpStatus.CREATED)
   @PostMapping("/create")
-  public void createClient(@RequestBody Client client){
+  public ResponseEntity<String> createClient(@RequestBody Client client){
+    if(!client.getEmail().contains("@") || client.getEmail().length() < 5){
+      return ResponseEntity.badRequest().body("Veuillez indiquer une adresse e-mail valide");
+    }
+
+    if(client.getPassword().length() < 8){
+      return ResponseEntity.badRequest().body("Veuillez saisir un mot de passe avec plus de 8 caractéres");
+    }
+
     this.clientService.createClient(client);
+    return ResponseEntity.ok("Compte ajouté avec succès");
   }
 
   @GetMapping("/find/{email}/{password}")
