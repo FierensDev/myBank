@@ -4,7 +4,7 @@ import { AccountCardComponent } from '../account-card/account-card.component';
 import { UserExpensesComponent } from '../user-expenses/user-expenses.component';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { environnement } from '../../environnement';
-import { CookieService } from 'ngx-cookie-service';
+import { CookieHandlerService } from '../services/cookie-handler.service';
 
 @Component({
   selector: 'app-account',
@@ -15,11 +15,10 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class AccountComponent implements OnInit {
 
-  constructor(private cookieService: CookieService){}
+  constructor(private cookieHandlerService: CookieHandlerService){}
   
   ngOnInit(): void {
-    let userId = JSON.parse(this.cookieService.get('CLIENT'))
-    console.log(`deunsLog : `, environnement.server_url + '/account/find/' + userId.id)
+    let userId = JSON.parse(this.cookieHandlerService.getCookie('MYBANK_CLIENT'))
     fetch(environnement.server_url + '/account/find/client/' + userId.id, {
       method: 'GET'
     })
@@ -32,22 +31,5 @@ export class AccountComponent implements OnInit {
 
   userAccounts: any[] = []
 
-  userExpenses: any[] = [
-    // {
-    //   id:1,
-    //   ibanSender: 'FR98709769869',
-    //   ibanReceiver: 'FR123445',
-    //   name: 'Salaire',
-    //   amount: 3500,
-    //   date: 1245
-    // },
-    // {
-    //   id:2,
-    //   ibanSender: 'FR98709769869',
-    //   ibanReceiver: 'FR123445',
-    //   name: 'Salaire',
-    //   amount: 5500,
-    //   date: 1245
-    // }
-  ]
+  userExpenses: any[] = []
 }

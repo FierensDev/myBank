@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MyBankIconComponent } from '../my-bank-icon/my-bank-icon.component';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
-import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { environnement } from '../../environnement';
+import { CookieHandlerService } from '../services/cookie-handler.service';
 
 @Component({
   selector: 'app-user-settings',
@@ -15,11 +15,11 @@ import { environnement } from '../../environnement';
 })
 export class UserSettingsComponent implements OnInit {
 
-  constructor(private cookieService: CookieService, private router: Router){}
+  constructor(private cookieHandlerService: CookieHandlerService, private router: Router){}
   client: any;
   clientData:any;
   ngOnInit(): void {
-    let userId = JSON.parse(this.cookieService.get('CLIENT'))
+    let userId = JSON.parse(this.cookieHandlerService.getCookie('MYBANK_CLIENT'))
     this.client = userId;
     console.log(`azer : `, this.client)
     fetch(environnement.server_url + '/client/find/' + userId.id, {
@@ -110,7 +110,7 @@ export class UserSettingsComponent implements OnInit {
   }
 
   disconnectUser(){
-    this.cookieService.delete('CLIENT');
-    window.location.href = "http://localhost:4200/mybank/home";
+    this.cookieHandlerService.deleteCookie('MYBANK_CLIENT')
+    this.router.navigateByUrl('/mybank/home')
   }
 }

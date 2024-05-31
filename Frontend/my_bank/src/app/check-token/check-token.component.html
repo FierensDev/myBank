@@ -2,7 +2,7 @@
 
   <router-outlet></router-outlet>
   <app-pop-up-component></app-pop-up-component>
-  @if(token){
+  @if(cookieHandlerService.token){
     <app-navbar></app-navbar>
   }
 

@@ -3,7 +3,7 @@ import { MyBankIconComponent } from '../my-bank-icon/my-bank-icon.component';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { environnement } from '../../environnement';
-import { CookieService } from 'ngx-cookie-service';
+import { CookieHandlerService } from '../services/cookie-handler.service';
 
 @Component({
   selector: 'app-create-account',
@@ -14,7 +14,7 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class CreateAccountComponent {
 
-  constructor(private cookieService: CookieService){}
+  constructor(private cookieHandlerService: CookieHandlerService){}
 
   cssIsFocused: string = '';
   onFocus(e: string){
@@ -25,7 +25,7 @@ export class CreateAccountComponent {
     this.cssIsFocused = '';
   }
 
-  cookieUser = JSON.parse(this.cookieService.get('CLIENT'))
+  cookieUser = JSON.parse(this.cookieHandlerService.getCookie('MYBANK_CLIENT'))
 
   applyForm = new FormGroup({
     name: new FormControl(''),

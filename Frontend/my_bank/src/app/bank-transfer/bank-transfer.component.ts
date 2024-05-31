@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MyBankIconComponent } from '../my-bank-icon/my-bank-icon.component';
 import { NgClass } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { CookieService } from 'ngx-cookie-service';
 import { environnement } from '../../environnement';
+import { CookieHandlerService } from '../services/cookie-handler.service';
 
 @Component({
   selector: 'app-bank-transfer',
@@ -14,11 +14,11 @@ import { environnement } from '../../environnement';
 })
 export class BankTransferComponent implements OnInit {
 
-  constructor(private cookieService: CookieService){}
+  constructor(private cookieHandlerService: CookieHandlerService){}
   userAccounts: any = null
   
   ngOnInit(): void {
-    let userId = JSON.parse(this.cookieService.get('CLIENT'))
+    let userId = JSON.parse(this.cookieHandlerService.getCookie('MYBANK_CLIENT'))
     
     fetch(environnement.server_url + '/account/find/client/' + userId.id, {
       method: 'GET'

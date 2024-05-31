@@ -4,13 +4,16 @@ import { CookieService } from 'ngx-cookie-service';
   providedIn: 'root'
 })
 export class CookieHandlerService {
-
   constructor(private cookieService: CookieService) {}
+  token: string = "";
+
   setCookie(name: string, value: string): void {
     this.cookieService.set(name, value);
+    this.token = this.cookieService.get(name);
   }
 
   getCookie(name: string): string {
+    this.token = this.cookieService.get(name);
     return this.cookieService.get(name);
   }
 
@@ -20,5 +23,6 @@ export class CookieHandlerService {
 
   deleteCookie(name: string): void {
     this.cookieService.delete(name);
+    this.token = "";
   }
 }
