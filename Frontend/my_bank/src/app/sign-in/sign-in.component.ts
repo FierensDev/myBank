@@ -33,19 +33,30 @@ export class SignInComponent {
   })
 
   submitApplication(){
+
+    if(!this.applyForm.value.email?.includes('@')){
+      this.popUpService.showNewMessage('Veuillez indiquer une adresse e-mail valide')
+    }
+
     fetch(`http://localhost:8080/client/find/${this.applyForm.value.email}/${this.applyForm.value.password}`, {
       method: 'GET'
     })
-    .then(response => response.json())
+    .then(response => {
+      console.log(`deunsLog : `, response)
+      if(response.ok){
+        return response.json()
+      } 
+      throw new Error('Server off')
+      })
     .then(data => {
+      console.log(`deunsLog : `, data)
       this.cookieHandlerService.setCookie('MYBANK_CLIENT', JSON.stringify(data))
       let cookie = this.cookieHandlerService.getCookie('MYBANK_CLIENT')
 
       this.router.navigateByUrl('/mybank/account');
     })
     .catch(error => {
-      console.error('There was a problem with the fetch operation:', error);
-      this.popUpService.showNewMessage('Oops ! il y a un probleme avec le serveur...')
+      this.popUpService.showNewMessage(error.message);
     });
   }
 
