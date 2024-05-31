@@ -1,3 +1,9 @@
 <div class="absolute top-[10px] left-[10px]">
-  <p class="bg-secondary text-alternative2 border border-primary p-3 rounded-md">{{message}}</p>
+  @if(popUpService.showComponent){
+    <div class="bg-secondary text-alternative2 border border-primary p-3 rounded-md">
+      {{popUpService.message}}
+    </div>
+  } @else {
+    <div></div>
+  }
 </div>

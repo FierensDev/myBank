@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PopUpService } from '../services/pop-up.service';
 
 @Component({
   selector: 'app-pop-up-component',
@@ -8,5 +9,5 @@ import { Component } from '@angular/core';
   styleUrl: './pop-up-component.css'
 })
 export class PopUpComponent {
-  message: String = "Email ou mot de passe éronné";
+  constructor(public popUpService: PopUpService){}
 }
