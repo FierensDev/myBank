@@ -4,6 +4,7 @@ import { NgClass } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { environnement } from '../../environnement';
+import { PopUpService } from '../services/pop-up.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -14,7 +15,7 @@ import { environnement } from '../../environnement';
 })
 export class SignUpComponent {
 
-  constructor(private router: Router){}
+  constructor(private router: Router, private popUpService: PopUpService ){}
   cssIsFocused: string = '';
   onFocus(e: string){
     this.cssIsFocused = e;
@@ -64,12 +65,17 @@ export class SignUpComponent {
     })
     })
     .then(response => {
-      if(response.status === 201){
+      if(response.ok){
         this.router.navigateByUrl('/mybank/sign-in');
       }
-    }) 
+      return response.text()
+    })
+    .then(text => {
+      this.popUpService.showNewMessage(text)
+      throw new Error(text); 
+    })
     .catch((error) => {
-      console.error('Erreur:', error);
+      console.error('Erreur:', error.Error);
     });
   }
 }
