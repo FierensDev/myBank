@@ -1,9 +1,12 @@
 Reste a faire : 
 
-gérer les erreurs + 
-affichage des messages.
+gérer les erreurs
+inscription 
+connexion
+création account
+ajout transaction
+modification user
 
-Faire courses lap
-Dermatologue
-Projet
- 
+tous les GET
+ + 
+affichage des messages. 
