@@ -36,13 +36,13 @@ public class AccountService {
     return null;
   }
 
-  public Account findAccountByIban(String iban) {
-    Optional<Account> optionalAccount = this.accountRepository.findByIban(iban);
-    if(optionalAccount.isPresent()){
-      return optionalAccount.get();
-    } 
-    return null;
-  }
+  // public Account findAccountByIban(String iban) {
+  //   Optional<Account> optionalAccount = this.accountRepository.findByIban(iban);
+  //   if(optionalAccount.isPresent()){
+  //     return optionalAccount.get();
+  //   } 
+  //   return null;
+  // }
   
   public List<Account> findAllAccounts(){
     return this.accountRepository.findAll();

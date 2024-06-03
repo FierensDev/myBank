@@ -4,6 +4,8 @@ import { NgClass } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { environnement } from '../../environnement';
 import { CookieHandlerService } from '../services/cookie-handler.service';
+import { PopUpService } from '../services/pop-up.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-bank-transfer',
@@ -14,7 +16,7 @@ import { CookieHandlerService } from '../services/cookie-handler.service';
 })
 export class BankTransferComponent implements OnInit {
 
-  constructor(private cookieHandlerService: CookieHandlerService){}
+  constructor(private cookieHandlerService: CookieHandlerService, private popUpService: PopUpService, private router: Router){}
   userAccounts: any = null
   
   ngOnInit(): void {
@@ -55,7 +57,6 @@ export class BankTransferComponent implements OnInit {
   }
 
   submitApplication(){
-    console.log(`deunsLog : test`, this.applyForm.value)
     fetch(environnement.server_url + '/account/newTransaction',{
       method: "PUT",
       headers: {
@@ -70,16 +71,25 @@ export class BankTransferComponent implements OnInit {
       })
     })
     .then(response => {
-      if (!response.ok) {
-          throw new Error('Network response was not ok ' + response.statusText);
+      if(response.ok){
+        return response.json();
       }
-      return response.json();
+      if(response.status == 404){
+        return response.json()
+        .then(data => {
+          console.log(`on Data : `, data)
+          this.popUpService.showNewMessage(data.error)
+          throw new Error(data)
+        })
+      }
+      return null;
     })
-    .then(data => {
-        console.log('Success:', data);
+    .then(text => {
+      this.popUpService.showNewMessage(text.message)
+      // this.router.navigateByUrl('/mybank/account');
     })
-    .catch(error => {
-        console.error('Error:', error);
+    .catch((error) => {
+      console.error('Erreur:', error);
     });
   }
 

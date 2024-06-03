@@ -7,6 +7,7 @@ import com.mybank.mybank.MessageResponse;
 import com.mybank.mybank.entity.Account;
 import com.mybank.mybank.entity.Client;
 import com.mybank.mybank.entity.Transaction;
+import com.mybank.mybank.repository.AccountRepository;
 import com.mybank.mybank.service.AccountService;
 
 import java.util.List;
@@ -26,9 +27,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @RequestMapping("/account")
 public class AccountController {
   private AccountService accountService;
+  private AccountRepository accountRepository;
 
-  public AccountController(AccountService accountService){
+  public AccountController(AccountService accountService, AccountRepository accountRepository){
     this.accountService = accountService;
+    this.accountRepository = accountRepository;
   }
 
   @PostMapping("/create")
@@ -86,7 +89,25 @@ public class AccountController {
   // }
   
   @PutMapping("/newTransaction")
-  public void modifyAccountByIban(@RequestBody Transaction transaction) {
-    this.accountService.modifyAccountsAmount(transaction);
+  public ResponseEntity<Object> modifyAccountByIban(@RequestBody Transaction transaction) {
+    Account ibanSender = accountRepository.findByIban(transaction.getIbanSender());
+    Account ibanReceiver = accountRepository.findByIban(transaction.getIbanReceiver());
+
+    System.out.println(ibanSender);
+    System.out.println(ibanReceiver);
+
+    if(ibanSender != null && ibanReceiver != null){
+
+      if(ibanSender == ibanReceiver){
+        ErrorResponse errorResponse = new ErrorResponse("Veuillez spécifier un IBAN différent de votre compte");
+        return ResponseEntity.status(404).body(errorResponse);
+      }
+      this.accountService.modifyAccountsAmount(transaction);
+      MessageResponse messageResponse = new MessageResponse("Transaction effectué vers " + transaction.getIbanReceiver());
+      return ResponseEntity.status(201).body(messageResponse);
+    }
+
+    ErrorResponse errorResponse = new ErrorResponse("Aucun compte trouvé avec cet IBAN");
+    return ResponseEntity.status(404).body(errorResponse);
   }
 }
