@@ -15,6 +15,6 @@ export class AppComponent implements OnInit {
   constructor(private router: Router){}
 
   ngOnInit(): void {
-    // this.router.navigate(['/mybank'])
+    this.router.navigate(['/mybank/home'])
   }
 }

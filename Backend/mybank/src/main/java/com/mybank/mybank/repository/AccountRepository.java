@@ -12,5 +12,5 @@ import com.mybank.mybank.entity.Account;
 public interface AccountRepository extends JpaRepository<Account, Integer> {
   @Query("SELECT acc FROM Account acc WHERE acc.client.id = :clientId")
   List<Account> findAllByClientId(@Param("clientId") int clientId);
-  Account findByIban(String iban);
+  Optional<Account> findByIban(String iban);
 }

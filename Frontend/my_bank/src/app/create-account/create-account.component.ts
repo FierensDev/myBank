@@ -4,6 +4,8 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { environnement } from '../../environnement';
 import { CookieHandlerService } from '../services/cookie-handler.service';
+import { PopUpService } from '../services/pop-up.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-account',
@@ -14,7 +16,7 @@ import { CookieHandlerService } from '../services/cookie-handler.service';
 })
 export class CreateAccountComponent {
 
-  constructor(private cookieHandlerService: CookieHandlerService){}
+  constructor(private router: Router,private popUpService: PopUpService,private cookieHandlerService: CookieHandlerService){}
 
   cssIsFocused: string = '';
   onFocus(e: string){
@@ -38,8 +40,6 @@ export class CreateAccountComponent {
 
 
   submitApplication(){
-    console.log(`deunsLog : test`, String(Date.now()))
-
     let dateNow =  String(Date.now())
 
     fetch(environnement.server_url + '/account/create', {
@@ -58,7 +58,23 @@ export class CreateAccountComponent {
         }
     })
     })
-    .then(data => {console.log(`deunsLog : `, data)})
-    .catch(err => console.log(`deunsLog : `, err))
+    .then(response => {
+      if(response.ok){
+        return response.json();
+      }
+      if(response.status == 500){
+        this.popUpService.showNewMessage("Impossible de trouver le client")
+        throw new Error("Impossible de trouver le client");
+      }
+      return null;
+    })
+    .then(data => {
+      console.log(`deunsLog : `, data)
+      this.popUpService.showNewMessage(data.message)
+      this.router.navigateByUrl('/mybank/account');
+    })
+    .catch((error) => {
+      console.error('Erreur:', error);
+    });
   }
 }

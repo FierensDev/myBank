@@ -5,6 +5,7 @@ import { NgClass } from '@angular/common';
 import { Router } from '@angular/router';
 import { environnement } from '../../environnement';
 import { CookieHandlerService } from '../services/cookie-handler.service';
+import { PopUpService } from '../services/pop-up.service';
 
 @Component({
   selector: 'app-user-settings',
@@ -15,7 +16,7 @@ import { CookieHandlerService } from '../services/cookie-handler.service';
 })
 export class UserSettingsComponent implements OnInit {
 
-  constructor(private cookieHandlerService: CookieHandlerService, private router: Router){}
+  constructor(private cookieHandlerService: CookieHandlerService, private router: Router, private popUpService: PopUpService){}
   client: any;
   clientData:any;
   ngOnInit(): void {
@@ -76,6 +77,7 @@ export class UserSettingsComponent implements OnInit {
     console.log(`deunsLog : test`, this.applyForm.value)
 
     fetch(environnement.server_url + '/client/modify/' + this.client.id,{
+      // fetch(environnement.server_url + '/client/modify/700',{
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -96,13 +98,22 @@ export class UserSettingsComponent implements OnInit {
     })
     })
     .then(response => {
-      if (!response.ok) {
-          throw new Error('Erreur de réseau');
+      if (response.ok) {
+        return response.json();
       }
-      return response.json();
+      if(response.status == 404){
+        return response.json()
+        .then(data => {
+          this.popUpService.showNewMessage(data.error)
+          throw new Error(data)
+        })
+      }
+      this.popUpService.showNewMessage("Erreur réseau")
+      return null;
     })
     .then(data => {
-        console.log('Succès:', data);
+        this.popUpService.showNewMessage(data.message);
+        this.router.navigateByUrl('/mybank/account');
     })
     .catch((error) => {
         console.error('Erreur:', error);

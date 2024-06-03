@@ -2,11 +2,15 @@ package com.mybank.mybank.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mybank.mybank.ErrorResponse;
+import com.mybank.mybank.MessageResponse;
 import com.mybank.mybank.entity.Client;
 import com.mybank.mybank.service.ClientService;
 
+import java.util.HashMap;
 import java.util.List;
 
+import org.hibernate.mapping.Map;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,24 +38,33 @@ public class ClientController {
   
   @ResponseStatus(value = HttpStatus.CREATED)
   @PostMapping("/create")
-  public ResponseEntity<String> createClient(@RequestBody Client client){
+  public ResponseEntity<Object> createClient(@RequestBody Client client){
     if(!client.getEmail().contains("@") || client.getEmail().length() < 5){
-      return ResponseEntity.badRequest().body("Veuillez indiquer une adresse e-mail valide");
+      ErrorResponse errorResponse = new ErrorResponse("Veuillez indiquer une adresse e-mail valide");
+      return ResponseEntity.status(404).body(errorResponse);
     }
 
     if(client.getPassword().length() < 8){
-      return ResponseEntity.badRequest().body("Veuillez saisir un mot de passe avec plus de 8 caractéres");
+      ErrorResponse errorResponse = new ErrorResponse("Veuillez saisir un mot de passe avec plus de 8 caractéres");
+      return ResponseEntity.status(404).body(errorResponse);
     }
 
     this.clientService.createClient(client);
-    return ResponseEntity.ok("Compte ajouté avec succès");
+    MessageResponse messageResponse = new MessageResponse("Compte ajouté avec succès");
+    return ResponseEntity.ok(messageResponse);
   }
 
   @GetMapping("/find/{email}/{password}")
-  public Client findClientByEmailAndPassword(@PathVariable String email, @PathVariable String password) {
-      return this.clientService.findClientByEmailAndPassword(email, password);
+  public ResponseEntity<Object> findClientByEmailAndPassword(@PathVariable String email, @PathVariable String password) {
+    Client client = this.clientService.findClientByEmailAndPassword(email, password);
+     if(client != null){
+      return ResponseEntity.ok().body(client);
+     }  else {
+
+      ErrorResponse errorResponse = new ErrorResponse("Email ou mot de passe incorrect");
+      return ResponseEntity.status(404).body(errorResponse);
+     }
   }
-  
 
   @GetMapping("/findAll")
   public List<Client> findClients(){
@@ -70,8 +83,18 @@ public class ClientController {
   }
 
   @PutMapping("/modify/{id}")
-  public void modifyClient(@PathVariable int id, @RequestBody Client client) {
-    this.clientService.modifyClient(id, client);
+  public ResponseEntity<Object> modifyClient(@PathVariable int id, @RequestBody Client client) {
+    Client clientInBdd = this.findClientById(id);
+    if(clientInBdd != null){
+      this.clientService.modifyClient(id, client);
+
+      MessageResponse messageResponse = new MessageResponse("Client modifié avec succès");
+      return ResponseEntity.status(200).body(messageResponse);
+    }
+    else {
+      ErrorResponse errorResponse = new ErrorResponse("Impossible de trouver le client à modifier");
+      return ResponseEntity.status(404).body(errorResponse);
+    }
   }
   
 }

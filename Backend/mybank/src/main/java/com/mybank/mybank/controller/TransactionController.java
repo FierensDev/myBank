@@ -2,9 +2,13 @@ package com.mybank.mybank.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mybank.mybank.ErrorResponse;
+import com.mybank.mybank.MessageResponse;
 import com.mybank.mybank.entity.Account;
 import com.mybank.mybank.entity.Client;
 import com.mybank.mybank.entity.Transaction;
+import com.mybank.mybank.repository.AccountRepository;
+import com.mybank.mybank.service.AccountService;
 import com.mybank.mybank.service.ClientService;
 import com.mybank.mybank.service.TransactionService;
 
@@ -26,15 +30,32 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class TransactionController {
 
   public TransactionService transactionService;
+  public AccountService accountService;
 
-  public TransactionController(TransactionService transactionService){
+  public TransactionController(TransactionService transactionService, AccountService accountService){
     this.transactionService = transactionService;
+    this.accountService = accountService;
   }
 
-  @ResponseStatus(value = HttpStatus.CREATED)
   @PostMapping("/create")
-  public void createTransaction(@RequestBody Transaction transaction){
-    this.transactionService.createTransaction(transaction);
+  public ResponseEntity<Object> createTransaction(@RequestBody Transaction transaction){
+    Account ibanSender = accountService.findAccountByIban(transaction.getIbanSender());
+    Account ibanReceiver = accountService.findAccountByIban(transaction.getIbanReceiver());
+
+    if(ibanSender != null && ibanReceiver != null){
+
+      if(ibanSender == ibanReceiver){
+        ErrorResponse errorResponse = new ErrorResponse("Veuillez spécifier un IBAN différent de votre compte");
+        return ResponseEntity.status(404).body(errorResponse);
+      }
+
+      this.transactionService.createTransaction(transaction);
+      MessageResponse messageResponse = new MessageResponse("Transaction effectué vers " + transaction.getIbanReceiver());
+      return ResponseEntity.status(201).body(messageResponse);
+    }
+
+    ErrorResponse errorResponse = new ErrorResponse("Veuillez spécifier un IBAN correct");
+    return ResponseEntity.status(404).body(errorResponse);
   }
 
   @GetMapping("/findAll")

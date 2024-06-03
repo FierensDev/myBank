@@ -66,16 +66,24 @@ export class SignUpComponent {
     })
     .then(response => {
       if(response.ok){
-        this.router.navigateByUrl('/mybank/sign-in');
+        return response.json();
       }
-      return response.text()
+      if(response.status == 404){
+        return response.json()
+        .then(data => {
+          console.log(`on Data : `, data)
+          this.popUpService.showNewMessage(data.error)
+          throw new Error(data)
+        })
+      }
+      return null;
     })
     .then(text => {
-      this.popUpService.showNewMessage(text)
-      throw new Error(text); 
+      this.popUpService.showNewMessage(text.message)
+      this.router.navigateByUrl('/mybank/sign-in');
     })
     .catch((error) => {
-      console.error('Erreur:', error.Error);
+      console.error('Erreur:', error);
     });
   }
 }

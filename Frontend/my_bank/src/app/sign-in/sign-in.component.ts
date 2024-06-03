@@ -46,10 +46,16 @@ export class SignInComponent {
       if(response.ok){
         return response.json()
       } 
+      if(response.status == 404){
+        return response.json()
+        .then(data => {
+          throw new Error(data.error)
+        })
+      }
       throw new Error('Server off')
       })
     .then(data => {
-      console.log(`deunsLog : `, data)
+      console.log(`data : `, data)
       this.cookieHandlerService.setCookie('MYBANK_CLIENT', JSON.stringify(data))
       let cookie = this.cookieHandlerService.getCookie('MYBANK_CLIENT')
 

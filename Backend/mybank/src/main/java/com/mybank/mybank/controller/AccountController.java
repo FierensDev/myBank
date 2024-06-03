@@ -2,6 +2,8 @@ package com.mybank.mybank.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mybank.mybank.ErrorResponse;
+import com.mybank.mybank.MessageResponse;
 import com.mybank.mybank.entity.Account;
 import com.mybank.mybank.entity.Client;
 import com.mybank.mybank.entity.Transaction;
@@ -30,12 +32,14 @@ public class AccountController {
   }
 
   @PostMapping("/create")
-  public ResponseEntity<String> createAccount(@RequestBody Account account) {
+  public ResponseEntity<Object> createAccount(@RequestBody Account account) {
       if (account.getClient() != null) {
           accountService.createAccount(account);
-          return ResponseEntity.ok("Compte ajouté avec succès");
+          MessageResponse messageResponse = new MessageResponse("Compté crée avec succès");
+          return ResponseEntity.ok(messageResponse);
       } else {
-          return ResponseEntity.badRequest().body("ID du client non spécifié");
+          ErrorResponse errorResponse = new ErrorResponse("Impossible de trouver le client");
+          return ResponseEntity.badRequest().body(errorResponse);
       }
   }
 
