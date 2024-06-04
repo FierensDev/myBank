@@ -4,5 +4,5 @@
     <div>{{ data.amount }}</div>
   </div>
   <div>{{ data.iban }}</div>
-  <div>mr lastName firstName</div>
+  <div>@if(clientInfo.gender == "men"){Mr} @if(clientInfo.gender == "women"){Mme}  {{clientInfo.lastName}} {{clientInfo.firstName}}</div>
 </div>

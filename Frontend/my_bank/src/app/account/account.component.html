@@ -24,7 +24,7 @@
   } 
   @else{
     @for (account of userAccounts; track account.id){
-      <app-account-card [data]="account"></app-account-card>
+      <app-account-card [data]="account" [clientInfo]="clientInfo"></app-account-card>
     }
   }
  

@@ -14,7 +14,7 @@
     <div [ngClass]="cssIsFocused === 'password' ? 'my-4 bg-secondary relative h-[40px] border border-black rounded-md' : 'my-4 bg-secondary relative h-[40px]'">
       <label for="password" [ngClass]="cssIsFocused === 'password' || (applyForm.value.password != '' && applyForm.value.password != null) ? ' text-form absolute top-0 left-0 z-10 flex place-items-center pl-[10px] pointer-events-none' : ' text-small absolute z-10 inset-0 flex place-items-center pl-[10px] pointer-events-none'">Mot de passe</label>
       <div class="flex justify-between ">
-        <input id="password" type="string" [ngClass]="cssIsFocused === 'password' || (applyForm.value.password != '' && applyForm.value.password != null) ? 'bg-transparent outline-none absolute bottom-0 left-[10px] right-[40px] h-[30px]' : 'text-secondary bg-transparent outline-none absolute bottom-0 left-[10px] right-[40px] h-[30px]'" formControlName="password" (focus)="onFocus('password')" (blur)="onBlur()">
+        <input id="password" type="password" [ngClass]="cssIsFocused === 'password' || (applyForm.value.password != '' && applyForm.value.password != null) ? 'bg-transparent outline-none absolute bottom-0 left-[10px] right-[40px] h-[30px]' : 'text-secondary bg-transparent outline-none absolute bottom-0 left-[10px] right-[40px] h-[30px]'" formControlName="password" (focus)="onFocus('password')" (blur)="onBlur()">
       </div>
     </div>
 

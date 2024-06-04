@@ -86,7 +86,7 @@ export class BankTransferComponent implements OnInit {
     })
     .then(text => {
       this.popUpService.showNewMessage(text.message)
-      // this.router.navigateByUrl('/mybank/account');
+      this.router.navigateByUrl('/mybank/account');
     })
     .catch((error) => {
       console.error('Erreur:', error);

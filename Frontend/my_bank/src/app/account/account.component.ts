@@ -16,10 +16,12 @@ import { CookieHandlerService } from '../services/cookie-handler.service';
 export class AccountComponent implements OnInit {
 
   constructor(private cookieHandlerService: CookieHandlerService){}
+  clientInfo: any;
   
   ngOnInit(): void {
-    let userId = JSON.parse(this.cookieHandlerService.getCookie('MYBANK_CLIENT'))
-    fetch(environnement.server_url + '/account/find/client/' + userId.id, {
+    this.clientInfo = JSON.parse(this.cookieHandlerService.getCookie('MYBANK_CLIENT'))
+    
+    fetch(environnement.server_url + '/account/find/client/' + this.clientInfo.id, {
       method: 'GET'
     })
     .then(res => res.json())
@@ -30,6 +32,5 @@ export class AccountComponent implements OnInit {
   }
 
   userAccounts: any[] = []
-
   userExpenses: any[] = []
 }

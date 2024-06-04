@@ -9,4 +9,5 @@ import { Component, Input } from '@angular/core';
 })
 export class AccountCardComponent {
   @Input() data: any;
+  @Input() clientInfo: any;
 }
