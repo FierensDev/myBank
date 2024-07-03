@@ -1,16 +1,16 @@
-# 💰Projet My_bank | AngularJS Java-Spring boot💰
+# 💰 My_bank | AngularJS Java-Spring boot💰
   
 Application bancaire, prise en main Angular + Spring boot
 
-`Démarrer le projet :`  
+`To start the project :`  
 ```
-Cloner le dépôt
+Clone the repository
 
-dossier Front :
+Front end folder :
 npm install
 ng serve
 
-dossier Back :
+Back end folder :
 Install all dependency to use Java and spring with VScode
 Run the server from the main file
 ```
