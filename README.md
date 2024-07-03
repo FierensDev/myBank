@@ -1,6 +1,6 @@
 # 💰 My_bank | AngularJS Java-Spring boot💰
   
-Application bancaire, prise en main Angular + Spring boot
+Banking application, getting started with Angular and Spring boot
 
 `To start the project :`  
 ```
